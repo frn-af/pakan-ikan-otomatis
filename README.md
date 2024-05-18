@@ -1,36 +1,33 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Sistem Pakan Ikan Otomatis
 
-## Getting Started
+## Deskripsi
 
-First, run the development server:
+Sistem Pakan Ikan Otomatis adalah sebuah sistem yang dirancang untuk memberikan pakan ikan secara otomatis.
+dengan mengatur waktu dan berat pakan yang akan di berikan kepada ikan. Sistem ini menggunakan mikrokontroler
+ESP32 sebagai otak dari sistem ini. Sistem ini juga dilengkapi dengan fitur-fitur yang memudahkan pengguna.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+source code ini berisi program web dan api yang digunakan untuk mengontrol sistem pakan ikan otomatis.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Fitur
+- [ ] Menjadwalkan waktu pemberian pakan
+- [ ] Menjadwalkan berat pakan
+- [ ] user friendly interface 
+- [ ] menampilkan history pemberian pakan dan berat pakan
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## todo 
+- [ ] deploy 
+- [ ] api update waktu dan berat pakan
+- [ ] api get history pemberian pakan
+- [ ] ui update waktu dan berat pakan
+- [ ] ui history pemberian pakan
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+## Cara Penggunaan
+1. Clone repository ini
+2. Buka terminal dan arahkan ke folder repository ini
+3. Install semua dependencies dengan cara mengetikkan perintah berikut
+    ```
+    pnpm install
+    ```
+4. Jalankan
 
-## Learn More
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
