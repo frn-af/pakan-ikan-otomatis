@@ -1,5 +1,4 @@
 import { Card } from "@/components/ui/card";
-import Image from "next/image";
 
 export default function Home() {
   return (
@@ -15,8 +14,6 @@ export default function Home() {
           mikrokontroler ESP32 sebagai otak dari sistem ini. Sistem ini juga
           dilengkapi dengan fitur- fitur yang memudahkan pengguna.
         </div>
-
-
       </Card>
     </main>
   );

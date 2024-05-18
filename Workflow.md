@@ -8,17 +8,21 @@ data = {
     "berat": 10 //optional 
 }
 ```
-- logic
+- Logic
+
 pada database akan ada beberapa data, lakukan sorting berdasarkan waktu.
 lalu lakukan pengecekan waktu, jika waktu sekarang sama dengan waktu yang dijadwalkan maka berikan pakan dengan berat yang dijadwalkan.
 jika pakan telah diberikan maka hapus data tersebut dari database.
 
 ```psuedocode
-data = get_data()
-sorted_data = sort_data(data)
-for i in sorted_data:
-    if i.waktu == now:
-        berikan_pakan(i.berat)
-        kirim_data_history(i)
-        delete_data(i)
+data = get_data() // get data from database
+if !data:
+    return   // if data is empty return 
+sorted_data = sort_data(data) // sort data by waktu
+for i in sorted_data:  // loop through sorted data
+    if i.waktu == now:  // check if waktu is now
+        berikan_pakan(i.berat) // berikan pakan
+        kirim_data_history(i) // kirim data history
+        delete_data(i) // delete data
 ```
+
