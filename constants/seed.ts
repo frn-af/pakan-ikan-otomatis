@@ -5,7 +5,7 @@ export type Schedule = {
   weight: number
 }
 
-export const schedule: Schedule[] = [
+export const history: Schedule[] = [
   {
     id: 1,
     datetime: "2021-10-10T08:00:00",
@@ -103,7 +103,7 @@ export const schedule: Schedule[] = [
   },
 ]
 
-export const history: Schedule[] = [
+export const schedule: Schedule[] = [
   {
     id: 1,
     datetime: "2021-10-10T08:00:00",
