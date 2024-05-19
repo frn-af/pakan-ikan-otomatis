@@ -2,8 +2,7 @@ import { column } from "@/components/column";
 import { DataTable } from "@/components/data-table";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { history, schedule } from "../../constants/seed";
-import { Button } from "@/components/ui/button";
-import { PlusIcon } from "lucide-react";
+import { InputJadwal } from "@/components/input-jadwal";
 
 export default function Home() {
 
@@ -17,10 +16,7 @@ export default function Home() {
           <CardHeader>
             <div className="flex justify-between">
               <h2 className="text-xl">Jadwal Pemberian Pakan</h2>
-              <Button variant="secondary" className="space-x-2 w-40">
-                <PlusIcon className="h-6 w-6" />
-                <span>Tambah Jadwal</span>
-              </Button>
+              <InputJadwal />
             </div>
           </CardHeader>
           <CardContent className="w-full">
