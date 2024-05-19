@@ -9,10 +9,11 @@ export default function Home() {
 
   return (
     <main className="flex min-h-screen flex-col items-center p-10">
-      <div className="capitalize text-4xl font-bold">
+      <h1 className="capitalize text-4xl font-bold">
         Sistem pemberian pakan otomatis
-      </div>
-      <div className="space-y-2 md:flex w-full md:space-x-2 mt-4">
+      </h1>
+      <Separator className="mt-4" />
+      <div className="space-y-2 md:flex w-full md:space-x-2 md:space-y-0 mt-2">
         <div className="w-full space-y-2">
           <Card className="p-4 w-full">
             <CardHeader>

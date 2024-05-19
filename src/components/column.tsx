@@ -18,9 +18,7 @@ export const column: ColumnDef<Schedule>[] = [
         hour: "2-digit",
         minute: "2-digit",
       });
-
       return <div>{formatedDate} WIB</div>;
-
     }
   },
   {
