@@ -52,8 +52,6 @@ export const column: ColumnDef<Schedule>[] = [
           </DropdownMenuContent>
         </DropdownMenu>
       )
-
-
     }
   }
 ]

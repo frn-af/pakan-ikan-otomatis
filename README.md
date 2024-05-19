@@ -12,14 +12,15 @@ source code ini berisi program web dan api yang digunakan untuk mengontrol siste
 - [ ] Menjadwalkan waktu pemberian pakan
 - [ ] Menjadwalkan berat pakan
 - [ ] user friendly interface 
-- [ ] menampilkan history pemberian pakan dan berat pakan
+- [x] menampilkan history pemberian pakan dan berat pakan
 
 ## todo 
 - [ ] deploy 
 - [ ] api update waktu dan berat pakan
 - [ ] api get history pemberian pakan
-- [ ] ui update waktu dan berat pakan
-- [ ] ui history pemberian pakan
+- [x] ui input jadwal pemberian pakan
+- [x] ui list waktu dan berat pakan
+- [x] ui list history pemberian pakan
 
 ## Cara Penggunaan
 1. Clone repository ini
