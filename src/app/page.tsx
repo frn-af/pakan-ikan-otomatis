@@ -1,20 +1,29 @@
-import { Card } from "@/components/ui/card";
+import { column } from "@/components/column";
+import { DataTable } from "@/components/data-table";
+import { Card, CardContent, CardHeader } from "@/components/ui/card";
+import { history, schedule } from "../../constants/seed";
 
 export default function Home() {
+
   return (
     <main className="flex min-h-screen flex-col items-center p-20">
       <div className="capitalize text-4xl font-bold">
         Sistem pemberian pakan otomatis
       </div>
-      <Card className="flex flex-col items-center justify-center">
-        <div className="text-center">
-          Sistem Pakan Ikan Otomatis adalah sebuah sistem yang dirancang untuk
-          memberikan pakan ikan secara otomatis. dengan mengatur waktu dan berat
-          pakan yang akan di berikan kepada ikan. Sistem ini menggunakan
-          mikrokontroler ESP32 sebagai otak dari sistem ini. Sistem ini juga
-          dilengkapi dengan fitur- fitur yang memudahkan pengguna.
-        </div>
-      </Card>
+      <div className="grid grid-cols-1 py-4 gap-4 md:grid-cols-2 w-full">
+        <Card className="flex flex-col p-4">
+          <CardHeader className="text-xl">Jadwal Pemberian Pakan</CardHeader>
+          <CardContent className="w-full">
+            <DataTable columns={column} data={schedule} />
+          </CardContent>
+        </Card>
+        <Card className="flex flex-col p-4">
+          <CardHeader className="text-xl">History Pemberian Pakan</CardHeader>
+          <CardContent className="w-full">
+            <DataTable columns={column} data={history} />
+          </CardContent>
+        </Card>
+      </div>
     </main>
   );
 }
