@@ -1,9 +1,10 @@
 "use client";
 
 import { format } from "date-fns";
-import { Calendar as CalendarIcon } from "lucide-react";
+import { Calendar as CalendarIcon, } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 import { Calendar } from "@/components/ui/calendar";
 import {
   Popover,
@@ -16,6 +17,7 @@ import {
   FormField,
   FormItem,
   FormLabel,
+  FormMessage,
 } from "@/components/ui/form";
 import { z } from "zod";
 import { useForm } from "react-hook-form";
@@ -26,6 +28,7 @@ import { TimePicker } from "./time-picker";
 
 const formSchema = z.object({
   dateTime: z.date(),
+  weight: z.coerce.number().min(1),
 });
 
 type FormSchemaType = z.infer<typeof formSchema>;
@@ -92,6 +95,19 @@ export function DateTimePickerForm() {
                   </div>
                 </PopoverContent>
               </Popover>
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
+          name="weight"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Berat Pakan</FormLabel>
+              <FormControl>
+                <Input type="number" placeholder="Berat pakan (gram)" {...field} />
+              </FormControl>
+              <FormMessage />
             </FormItem>
           )}
         />
