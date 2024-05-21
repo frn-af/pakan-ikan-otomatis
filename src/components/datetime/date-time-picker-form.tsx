@@ -52,7 +52,7 @@ export function DateTimePickerForm() {
   return (
     <Form {...form}>
       <form
-        className="flex items-end gap-4 justify-center"
+        className="md:flex items-end gap-4 justify-center"
         onSubmit={form.handleSubmit(onSubmit)}
       >
         <FormField
@@ -67,7 +67,7 @@ export function DateTimePickerForm() {
                     <Button
                       variant="outline"
                       className={cn(
-                        "w-[280px] justify-start text-left font-normal",
+                        "md:w-[280px] justify-start text-left font-normal",
                         !field.value && "text-muted-foreground"
                       )}
                     >
@@ -111,7 +111,7 @@ export function DateTimePickerForm() {
             </FormItem>
           )}
         />
-        <Button type="submit">Submit</Button>
+        <Button className="w-full mt-4 md:w-24" type="submit">Submit</Button>
       </form>
     </Form>
   );

@@ -4,6 +4,7 @@ import { eq } from "drizzle-orm";
 import { Hono } from "hono";
 import { cors } from "hono/cors";
 import { handle } from "hono/vercel";
+import { PageConfig } from "next";
 
 const newData = async (data: InsertData) => {
   const newSchedule = await db.insert(schedule).values(data).returning();
@@ -15,7 +16,7 @@ const newData = async (data: InsertData) => {
 
 export const runtime = "edge";
 
-const app = new Hono().basePath("/v1/api");
+const app = new Hono().basePath("/api");
 
 app.use("/*", cors());
 app.get("/schedule", async (c) => {
@@ -88,4 +89,6 @@ app.delete("/schedule/:id", async (c) => {
 
 export const GET = handle(app);
 export const POST = handle(app);
+export const PUT = handle(app);
+export const DELETE = handle(app);
 export default app as never;

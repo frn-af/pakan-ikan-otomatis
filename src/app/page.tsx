@@ -1,11 +1,25 @@
+"use client";
 import { column } from "@/components/column";
 import { DataTable } from "@/components/data-table";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
-import { history, schedule } from "../../constants/seed";
+import { Schedule, history, schedule } from "../../constants/seed";
 import { DateTimePickerForm } from "@/components/datetime/date-time-picker-form";
 import { Separator } from "@/components/ui/separator";
+import { useEffect, useState } from "react";
 
 export default function Home() {
+  const [scheduleData, setScheduleData] = useState();
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const response = await fetch("/api/schedule");
+      const data = await response.json();
+      console.log(data);
+      setScheduleData(data);
+    }
+
+    fetchData();
+  }, [])
 
   return (
     <main className="flex min-h-screen flex-col items-center p-10">
@@ -34,7 +48,9 @@ export default function Home() {
             </CardHeader>
             <Separator className="mb-4" />
             <CardContent className="w-full">
-              <DataTable columns={column} data={schedule} />
+              {scheduleData && (
+                <DataTable columns={column} data={scheduleData} />
+              )}
             </CardContent>
           </Card>
         </div>
