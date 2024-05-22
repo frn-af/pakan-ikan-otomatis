@@ -8,6 +8,7 @@ import { Separator } from "@/components/ui/separator";
 import { Suspense } from "react";
 import { getHistory, getSchedule } from "@/action/action";
 
+
 export default async function Home() {
   const scheduleData = await getSchedule();
   const historyData = await getHistory();

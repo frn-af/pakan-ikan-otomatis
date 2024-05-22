@@ -1,4 +1,4 @@
-import { getSchedule, newData } from "@/action/action";
+import { getHistory, getSchedule, newData } from "@/action/action";
 import { db } from "@/lib/db/db";
 import { InsertData, schedule } from "@/lib/db/schema";
 import { eq } from "drizzle-orm";
@@ -74,6 +74,29 @@ app.delete("/schedule/:id", async (c) => {
       .where(eq(schedule.id, scheduleId))
       .returning();
     return c.json(deleted);
+  } catch (e) {
+    return c.json({ error: e });
+  }
+});
+
+app.get("/history", async (c) => {
+  try {
+    const historyData = await getHistory();
+    return c.json(historyData);
+  } catch (e) {
+    return c.json({ error: e });
+  }
+});
+
+app.post("/history", async (c) => {
+  try {
+    const data = await c.req.json<InsertData>();
+
+    if (!data) {
+      return c.json({ error: "missing required fields" });
+    }
+    const history = await newHistory(data);
+    return c.json(history);
   } catch (e) {
     return c.json({ error: e });
   }

@@ -1,23 +1,26 @@
-"use server"
+"use server";
 
 import { db } from "@/lib/db/db";
-import { InsertData, schedule } from "@/lib/db/schema";
-import { cache } from "react";
+import { InsertData, history, schedule } from "@/lib/db/schema";
 import { eq } from "drizzle-orm";
 import { revalidatePath } from "next/cache";
-
+import { cache } from "react";
 
 export const getSchedule = cache(async () => {
   const schedule = await db.query.schedule.findMany();
-  return schedule;
+  const sortedSchedule = schedule.sort((a, b) => {
+    return new Date(b.datetime).getTime() - new Date(a.datetime).getTime();
+  });
+  return sortedSchedule;
 });
-
 
 export const getHistory = cache(async () => {
   const history = await db.query.history.findMany();
-  return history;
+  const sortedHistory = history.sort((a, b) => {
+    return new Date(b.datetime).getTime() - new Date(a.datetime).getTime();
+  });
+  return sortedHistory;
 });
-
 
 export const newData = async (data: InsertData) => {
   const newSchedule = await db.insert(schedule).values(data).returning();
@@ -28,3 +31,23 @@ export const newData = async (data: InsertData) => {
   return getSchedule;
 };
 
+export const updateData = async (data: InsertData) => {
+  const updateSchedule = await db
+    .update(schedule)
+    .set(data)
+    .where(eq(schedule.id, data.id ?? 0)) // Add null check and provide a default value
+    .returning();
+  const getSchedule = await db.query.schedule.findFirst({
+    where: eq(schedule.id, updateSchedule[0]!.id), // Add null check and provide a default value
+  });
+  revalidatePath("/");
+  return getSchedule;
+};
+
+export const newHistory = async (data: InsertData) => {
+  const newHistory = await db.insert(history).values(data).returning();
+  const getHistory = await db.query.history.findFirst({
+    where: eq(history.id, newHistory[0]!.id),
+  });
+  return getHistory;
+};

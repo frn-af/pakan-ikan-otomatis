@@ -40,10 +40,20 @@ export function DateTimePickerForm() {
   });
 
   const onSubmit = async (data: FormSchemaType) => {
-    await newData({
+    const newSchedule = await newData({
       datetime: data.dateTime.toISOString(),
       weight: data.weight,
     });
+    if (!newSchedule) {
+      toast({
+        title: "Penambahan Jadwal Gagal",
+        description: (
+          <div>
+            ada kesalahan saat menambahkan jadwal, silahkan coba lagi.
+          </div>
+        ),
+      });
+    }
     toast({
       title: "Penambahan Jadwal Berhasil",
       description: (
@@ -74,7 +84,7 @@ export function DateTimePickerForm() {
                     <Button
                       variant="outline"
                       className={cn(
-                        "md:w-[280px] justify-start text-left font-normal",
+                        "lg:w-[280px] justify-start text-left font-normal",
                         !field.value && "text-muted-foreground"
                       )}
                     >
