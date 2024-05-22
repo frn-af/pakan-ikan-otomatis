@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button"
 import {
   Dialog,
+  DialogClose,
   DialogContent,
   DialogDescription,
   DialogFooter,
@@ -51,7 +52,7 @@ export function EditForm({ row }: EditFormProps) {
       datetime: data.dateTime.toISOString(),
       weight: data.weight,
     })
-    if (updateSchedule instanceof Error) {
+    if (updateSchedule instanceof Error || !updateSchedule) {
       return toast({
         title: "Penambahan Jadwal Gagal",
         description: "Terjadi kesalahan saat menambahkan jadwal, silahkan coba lagi.",
@@ -143,7 +144,10 @@ export function EditForm({ row }: EditFormProps) {
                 )}
               />
               <DialogFooter>
-                <Button className="w-full mt-4 md:w-24" type="submit">Submit</Button>
+                <DialogClose asChild>
+
+                  <Button className="w-full mt-4 md:w-24" type="submit">Submit</Button>
+                </DialogClose >
               </DialogFooter>
             </form>
           </Form>

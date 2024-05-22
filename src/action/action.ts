@@ -44,6 +44,15 @@ export const updateData = async (data: InsertData) => {
   return getSchedule;
 };
 
+export const deleteData = async (id: number) => {
+  const deleteSchedule = await db
+    .delete(schedule)
+    .where(eq(schedule.id, id))
+    .returning();
+  revalidatePath("/");
+  return deleteSchedule;
+}
+
 export const newHistory = async (data: InsertData) => {
   const newHistory = await db.insert(history).values(data).returning();
   const getHistory = await db.query.history.findFirst({

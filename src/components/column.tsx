@@ -2,6 +2,7 @@
 import { ColumnDef } from "@tanstack/react-table";
 import { Schedule } from "../../constants/seed";
 import { EditForm } from "./edit-form";
+import DeleteData from "./delete-data";
 
 export const column: ColumnDef<Schedule>[] = [
   {
@@ -27,7 +28,10 @@ export const column: ColumnDef<Schedule>[] = [
     id: "action",
     cell: ({ row }) => {
       return (
-        <EditForm row={row} />
+        <div className="space-x-2">
+          <EditForm row={row} />
+          <DeleteData row={row} />
+        </div>
       )
     },
   }

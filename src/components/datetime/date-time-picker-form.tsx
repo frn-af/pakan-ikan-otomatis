@@ -44,8 +44,9 @@ export function DateTimePickerForm() {
       datetime: data.dateTime.toISOString(),
       weight: data.weight,
     });
-    if (!newSchedule) {
+    if (newSchedule instanceof Error || !newSchedule) {
       toast({
+        variant: "destructive",
         title: "Penambahan Jadwal Gagal",
         description: (
           <div>
