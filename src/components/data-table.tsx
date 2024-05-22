@@ -6,17 +6,25 @@ import { Button } from "./ui/button";
 interface DataTableProps<TData, Tvalue> {
   data: TData[];
   columns: ColumnDef<TData, Tvalue>[];
+  pageSize?: number;
 }
 
 export function DataTable<TData, Tvalue>({
   data,
   columns,
+  pageSize,
 }: DataTableProps<TData, Tvalue>) {
   const table = useReactTable({
     data,
     columns,
     getCoreRowModel: getCoreRowModel(),
-    getPaginationRowModel: getPaginationRowModel()
+    getPaginationRowModel: getPaginationRowModel(),
+    initialState: {
+      pagination: {
+        pageIndex: 0,
+        pageSize: pageSize || 10,
+      },
+    },
   })
   return (
     <>
@@ -53,9 +61,11 @@ export function DataTable<TData, Tvalue>({
                   </TableRow>
                 ))
               ) : (
-                <TableRow >
-                  <TableCell >
-                    No data
+                <TableRow>
+                  <TableCell colSpan={columns.length}>
+                    <div className="flex items-center justify-center text-muted">
+                      No data
+                    </div>
                   </TableCell>
                 </TableRow>
               )

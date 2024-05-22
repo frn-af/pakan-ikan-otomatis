@@ -1,18 +1,10 @@
+import { getSchedule, newData } from "@/action/action";
 import { db } from "@/lib/db/db";
 import { InsertData, schedule } from "@/lib/db/schema";
 import { eq } from "drizzle-orm";
 import { Hono } from "hono";
 import { cors } from "hono/cors";
 import { handle } from "hono/vercel";
-import { PageConfig } from "next";
-
-const newData = async (data: InsertData) => {
-  const newSchedule = await db.insert(schedule).values(data).returning();
-  const getSchedule = await db.query.schedule.findFirst({
-    where: eq(schedule.id, newSchedule[0]!.id),
-  });
-  return getSchedule;
-};
 
 export const runtime = "edge";
 
@@ -21,8 +13,8 @@ const app = new Hono().basePath("/api");
 app.use("/*", cors());
 app.get("/schedule", async (c) => {
   try {
-    const schedule = await db.query.schedule.findMany();
-    return c.json(schedule);
+    const scheduleData = await getSchedule();
+    return c.json(scheduleData);
   } catch (e) {
     return c.json({ error: e });
   }

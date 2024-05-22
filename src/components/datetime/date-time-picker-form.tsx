@@ -1,5 +1,4 @@
 "use client";
-
 import { format } from "date-fns";
 import { Calendar as CalendarIcon, } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -25,8 +24,10 @@ import { zodResolver } from "@hookform/resolvers/zod";
 
 import { toast } from "@/components/ui/use-toast";
 import { TimePicker } from "./time-picker";
+import { newData } from "@/action/action";
 
 const formSchema = z.object({
+  id: z.number().optional(),
   dateTime: z.date(),
   weight: z.coerce.number().min(1),
 });
@@ -38,13 +39,19 @@ export function DateTimePickerForm() {
     resolver: zodResolver(formSchema),
   });
 
-  function onSubmit(data: FormSchemaType) {
+  const onSubmit = async (data: FormSchemaType) => {
+    await newData({
+      datetime: data.dateTime.toISOString(),
+      weight: data.weight,
+    });
     toast({
-      title: "You submitted the following values:",
+      title: "Penambahan Jadwal Berhasil",
       description: (
-        <pre>
-          <code>{JSON.stringify(data, null, 2)}</code>
-        </pre>
+        <div>
+          Pemberian Pakan akan dilakukan pada tanggal{" "}
+          <strong>{format(data.dateTime, "PPP HH:mm:ss")}</strong>
+          {" "} dengan berat pakan: <strong>{data.weight} gram</strong>.
+        </div>
       ),
     });
   }
@@ -80,6 +87,7 @@ export function DateTimePickerForm() {
                     </Button>
                   </PopoverTrigger>
                 </FormControl>
+                <FormMessage />
                 <PopoverContent className="w-auto p-0">
                   <Calendar
                     mode="single"

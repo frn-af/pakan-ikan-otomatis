@@ -2,7 +2,7 @@
 import { column } from "@/components/column";
 import { DataTable } from "@/components/data-table";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
-import { history } from "../../constants/seed";
+import { history } from "../../../constants/seed";
 import { DateTimePickerForm } from "@/components/datetime/date-time-picker-form";
 import { Separator } from "@/components/ui/separator";
 import { Suspense } from "react";
@@ -39,7 +39,7 @@ export default async function Home() {
             <Separator className="mb-4" />
             <CardContent className="w-full">
               <Suspense key={scheduleData[0].id} fallback={<div>Loading...</div>}>
-                <DataTable pageSize={7} columns={column} data={scheduleData} />
+                <DataTable columns={column} data={scheduleData} />
               </Suspense>
             </CardContent>
           </Card>
@@ -50,7 +50,7 @@ export default async function Home() {
           </CardHeader>
           <Separator className="mb-4" />
           <CardContent className="w-full">
-            <DataTable columns={column} data={historyData} />
+            <DataTable columns={column} data={history} />
           </CardContent>
         </Card>
       </div>
