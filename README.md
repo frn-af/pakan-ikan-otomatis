@@ -8,7 +8,9 @@ ESP32 sebagai otak dari sistem ini. Sistem ini juga dilengkapi dengan fitur-fitu
 
 source code ini berisi program web dan api yang digunakan untuk mengontrol sistem pakan ikan otomatis.
 
-## teknologi dan Fitur
+Workflow and API reference[documentation](./Documentations.md)
+
+## Teknologi dan Fitur
 - language : [Typescript](https://www.typescriptlang.org/)
 - framework : [Next js](https://nextjs.org/docs) with `/app` directory
 - api : [Hono](https://hono.dev/) (api directory)
@@ -25,15 +27,6 @@ source code ini berisi program web dan api yang digunakan untuk mengontrol siste
 - [x] user friendly interface 
 - [x] menampilkan history pemberian pakan dan berat pakan
 
-## todo 
-- [ ] deploy 
-- [x] ~~api update waktu dan berat pakan~~
-- [x] ~~api get history pemberian pakan~~
-- [x] ~~ui input jadwal pemberian pakan~~
-- [x] ~~ui list waktu dan berat pakan~~
-- [x] ~~ui list history pemberian pakan~~
-- [ ] testing api update waktu dan berat pakan 
-
 ## Cara Penggunaan
 1. Clone repository ini
 2. Buka terminal dan arahkan ke folder repository ini
@@ -42,5 +35,14 @@ source code ini berisi program web dan api yang digunakan untuk mengontrol siste
     pnpm install
     ```
 4. Jalankan
+
+## Todo 
+- [ ] deploy 
+- [x] ~~api update waktu dan berat pakan~~
+- [x] ~~api get history pemberian pakan~~
+- [x] ~~ui input jadwal pemberian pakan~~
+- [x] ~~ui list waktu dan berat pakan~~
+- [x] ~~ui list history pemberian pakan~~
+- [ ] testing api update waktu dan berat pakan 
 
 
