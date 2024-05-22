@@ -1,7 +1,7 @@
 "use server";
 
 import { db } from "@/lib/db/db";
-import { InsertData, history, schedule } from "@/lib/db/schema";
+import { InsertData, schedule } from "@/lib/db/schema";
 import { eq } from "drizzle-orm";
 import { revalidatePath } from "next/cache";
 import { cache } from "react";
@@ -15,8 +15,8 @@ export const getSchedule = cache(async () => {
 });
 
 export const getHistory = cache(async () => {
-  const history = await db.query.history.findMany();
-  const sortedHistory = history.sort((a, b) => {
+  const historyData = await db.query.history.findMany();
+  const sortedHistory = historyData.sort((a, b) => {
     return new Date(b.datetime).getTime() - new Date(a.datetime).getTime();
   });
   return sortedHistory;
@@ -53,10 +53,3 @@ export const deleteData = async (id: number) => {
   return deleteSchedule;
 }
 
-export const newHistory = async (data: InsertData) => {
-  const newHistory = await db.insert(history).values(data).returning();
-  const getHistory = await db.query.history.findFirst({
-    where: eq(history.id, newHistory[0]!.id),
-  });
-  return getHistory;
-};

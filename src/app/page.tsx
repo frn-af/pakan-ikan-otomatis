@@ -2,7 +2,6 @@
 import { column } from "@/components/column";
 import { DataTable } from "@/components/data-table";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
-import { history } from "../../constants/seed";
 import { DateTimePickerForm } from "@/components/datetime/date-time-picker-form";
 import { Separator } from "@/components/ui/separator";
 import { Suspense } from "react";

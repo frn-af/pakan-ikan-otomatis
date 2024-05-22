@@ -1,6 +1,6 @@
-import { getHistory, getSchedule, newData } from "@/action/action";
+import { getHistory, getSchedule } from "@/action/action";
 import { db } from "@/lib/db/db";
-import { InsertData, schedule } from "@/lib/db/schema";
+import { InsertData, history, schedule } from "@/lib/db/schema";
 import { eq } from "drizzle-orm";
 import { Hono } from "hono";
 import { cors } from "hono/cors";
@@ -23,12 +23,17 @@ app.get("/schedule", async (c) => {
 app.post("/schedule", async (c) => {
   try {
     const data = await c.req.json<InsertData>();
-
     if (!data) {
-      return c.json({ error: "missing required fields" });
+      return c.json({
+        error: "missing required fields",
+        status: 400
+      });
     }
-    const schedule = await newData(data);
-    return c.json(schedule);
+    const newSchedule = await db.insert(schedule).values(data).returning();
+    const getSchedule = await db.query.schedule.findFirst({
+      where: eq(schedule.id, newSchedule[0]!.id),
+    });
+    return c.json(getSchedule);
   } catch (e) {
     return c.json({ error: e });
   }
@@ -95,8 +100,11 @@ app.post("/history", async (c) => {
     if (!data) {
       return c.json({ error: "missing required fields" });
     }
-    const history = await newHistory(data);
-    return c.json(history);
+    const newHistory = await db.insert(history).values(data).returning();
+    const getHistory = await db.query.schedule.findFirst({
+      where: eq(schedule.id, newHistory[0]!.id),
+    });
+    return c.json(getHistory);
   } catch (e) {
     return c.json({ error: e });
   }

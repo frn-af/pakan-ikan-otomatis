@@ -1,14 +1,14 @@
-import { integer, pgTable, serial, text } from "drizzle-orm/pg-core";
+import { date, integer, pgTable, serial, } from "drizzle-orm/pg-core";
 
 export const schedule = pgTable("schedule", {
   id: serial("id").primaryKey(),
-  datetime: text("datetime").notNull(),
+  datetime: date("datetime").notNull(),
   weight: integer("weight").notNull(),
 })
 
 export const history = pgTable("history", {
   id: serial("id").primaryKey(),
-  datetime: text("datetime").notNull(),
+  datetime: date("datetime").notNull(),
   weight: integer("weight").notNull(),
 })
 
