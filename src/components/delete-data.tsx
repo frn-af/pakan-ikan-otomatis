@@ -16,6 +16,13 @@ const DeleteData = async ({ row }: DeleteDataProps) => {
 
   const onClick = async () => {
     const id = row.original.id;
+    if (!id) {
+      return toast({
+        title: "Penghapusan Jadwal Gagal",
+        description: "Terjadi kesalahan saat menghapus jadwal, silahkan coba lagi.",
+        variant: "destructive",
+      });
+    }
     const deleteSchedule = await deleteData(id);
     if (DeleteData instanceof Error || !deleteSchedule) {
       return toast({
@@ -26,10 +33,8 @@ const DeleteData = async ({ row }: DeleteDataProps) => {
     }
     toast({
       title: "Penghapusan Jadwal Berhasil",
-      description: "Jadwal berhasil dihapus.",
     });
   }
-
 
   return (
     <Dialog>

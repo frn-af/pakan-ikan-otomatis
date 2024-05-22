@@ -14,6 +14,13 @@ export const getSchedule = cache(async () => {
   return sortedSchedule;
 });
 
+export const getSchedulesByDate = cache(async (date: Date) => {
+  const scheduleData = await db.query.schedule.findMany({
+    where: eq(schedule.datetime, date.toISOString()),
+  });
+  return scheduleData;
+});
+
 export const getHistory = cache(async () => {
   const historyData = await db.query.history.findMany();
   const sortedHistory = historyData.sort((a, b) => {

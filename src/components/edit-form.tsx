@@ -19,11 +19,12 @@ import { TimePicker } from "./datetime/time-picker"
 import { Input } from "./ui/input"
 import { cn } from "@/lib/utils"
 import { format } from "date-fns"
+import { id } from "date-fns/locale";
 import { Card } from "./ui/card"
 import { toast } from "./ui/use-toast"
 import { Row } from "@tanstack/react-table"
 import { Schedule } from "../../constants/seed"
-import { updateData } from "@/action/action"
+import { getSchedulesByDate, updateData } from "@/action/action"
 
 const formSchema = z.object({
   id: z.number().optional(),
@@ -47,6 +48,45 @@ export function EditForm({ row }: EditFormProps) {
   })
 
   const onSubmit = async (data: FormSchemaType) => {
+    if (!data.dateTime || !data.weight) {
+      toast({
+        variant: "destructive",
+        title: "Penambahan Jadwal Gagal",
+        description: (
+          <div>
+            Tanggal dan berat pakan tidak boleh kosong.
+          </div>
+        ),
+      });
+      return;
+    }
+    if (new Date().getTime() > data.dateTime.getTime()) {
+      toast({
+        variant: "destructive",
+        title: "Penambahan Jadwal Gagal",
+        description: (
+          <div>
+            Jadwal pemberian pakan tidak boleh kurang dari hari ini.
+          </div>
+        ),
+      });
+      return;
+    }
+    const checkData = await getSchedulesByDate(data.dateTime);
+    if (checkData.length > 0) {
+      toast({
+        variant: "destructive",
+        title: "Penambahan Jadwal Gagal",
+        description: (
+          <div>
+            Jadwal pemberian pakan pada tanggal{" "}
+            <strong>{format(data.dateTime, "PPP HH:mm:ss", { locale: id })}</strong> sudah ada.
+            silahkan update jadwal yang sudah ada.
+          </div>
+        ),
+      });
+      return;
+    }
     const updateSchedule = await updateData({
       id: row.original.id,
       datetime: data.dateTime.toISOString(),
@@ -55,7 +95,7 @@ export function EditForm({ row }: EditFormProps) {
     if (updateSchedule instanceof Error || !updateSchedule) {
       return toast({
         title: "Penambahan Jadwal Gagal",
-        description: "Terjadi kesalahan saat menambahkan jadwal, silahkan coba lagi.",
+        description: "Terjadi kesalahan saat mengubah jadwal, silahkan coba lagi.",
         variant: "destructive",
       });
     }
@@ -108,7 +148,7 @@ export function EditForm({ row }: EditFormProps) {
                       >
                         <CalendarIcon className="mr-2 h-4 w-4" />
                         {field.value ? (
-                          format(field.value, "PPP HH:mm:ss")
+                          format(field.value, "PPP HH:mm:ss", { locale: id })
                         ) : (
                           <span>Pick a date</span>
                         )}

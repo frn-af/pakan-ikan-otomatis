@@ -1,5 +1,6 @@
 "use client";
 import { format } from "date-fns";
+import { id } from "date-fns/locale";
 import { Calendar as CalendarIcon, } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
@@ -24,7 +25,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 
 import { toast } from "@/components/ui/use-toast";
 import { TimePicker } from "./time-picker";
-import { newData } from "@/action/action";
+import { newData, getSchedulesByDate } from "@/action/action";
 
 const formSchema = z.object({
   id: z.number().optional(),
@@ -40,6 +41,46 @@ export function DateTimePickerForm() {
   });
 
   const onSubmit = async (data: FormSchemaType) => {
+    if (!data.dateTime || !data.weight) {
+      toast({
+        variant: "destructive",
+        title: "Penambahan Jadwal Gagal",
+        description: (
+          <div>
+            Tanggal dan berat pakan tidak boleh kosong.
+          </div>
+        ),
+      });
+      return;
+    }
+    if (new Date().getTime() > data.dateTime.getTime()) {
+      toast({
+        variant: "destructive",
+        title: "Penambahan Jadwal Gagal",
+        description: (
+          <div>
+            Jadwal pemberian pakan tidak boleh kurang dari hari ini.
+          </div>
+        ),
+      });
+      return;
+    }
+    const checkData = await getSchedulesByDate(data.dateTime);
+    if (checkData.length > 0) {
+      toast({
+        variant: "destructive",
+        title: "Penambahan Jadwal Gagal",
+        description: (
+          <div>
+            Jadwal pemberian pakan pada tanggal{" "}
+            <strong>{format(data.dateTime, "PPP HH:mm:ss", { locale: id })}</strong> sudah ada.
+            silahkan update jadwal yang sudah ada.
+          </div>
+        ),
+      });
+      return;
+    }
+
     const newSchedule = await newData({
       datetime: data.dateTime.toISOString(),
       weight: data.weight,
@@ -48,19 +89,16 @@ export function DateTimePickerForm() {
       toast({
         variant: "destructive",
         title: "Penambahan Jadwal Gagal",
-        description: (
-          <div>
-            ada kesalahan saat menambahkan jadwal, silahkan coba lagi.
-          </div>
-        ),
+        description: "Terjadi kesalahan saat menambahkan jadwal, silahkan coba lagi.",
       });
+      return;
     }
     toast({
       title: "Penambahan Jadwal Berhasil",
       description: (
         <div>
           Pemberian Pakan akan dilakukan pada tanggal{" "}
-          <strong>{format(data.dateTime, "PPP HH:mm:ss")}</strong>
+          <strong>{format(data.dateTime, "PPP HH:mm:ss", { locale: id })}</strong>
           {" "} dengan berat pakan: <strong>{data.weight} gram</strong>.
         </div>
       ),
@@ -91,7 +129,7 @@ export function DateTimePickerForm() {
                     >
                       <CalendarIcon className="mr-2 h-4 w-4" />
                       {field.value ? (
-                        format(field.value, "PPP HH:mm:ss")
+                        format(field.value, "PPP HH:mm:ss", { locale: id })
                       ) : (
                         <span>Pick a date</span>
                       )}
