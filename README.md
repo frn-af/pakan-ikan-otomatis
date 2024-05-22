@@ -27,11 +27,11 @@ source code ini berisi program web dan api yang digunakan untuk mengontrol siste
 
 ## todo 
 - [ ] deploy 
-- [x] --api update waktu dan berat pakan--
-- [x] --api get history pemberian pakan--
-- [x] --ui input jadwal pemberian pakan--
-- [x] --ui list waktu dan berat pakan--
-- [x] --ui list history pemberian pakan--
+- [x] ~~api update waktu dan berat pakan~~
+- [x] ~~api get history pemberian pakan~~
+- [x] ~~ui input jadwal pemberian pakan~~
+- [x] ~~ui list waktu dan berat pakan~~
+- [x] ~~ui list history pemberian pakan~~
 - [ ] testing api update waktu dan berat pakan 
 
 ## Cara Penggunaan
