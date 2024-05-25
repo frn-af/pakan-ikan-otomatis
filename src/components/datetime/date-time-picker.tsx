@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { format } from "date-fns";
+import { add, format } from "date-fns";
 import { Calendar as CalendarIcon } from "lucide-react";
 
 import { cn } from "@/lib/utils";
@@ -16,6 +16,19 @@ import { TimePicker } from "./time-picker";
 
 export function DateTimePicker() {
   const [date, setDate] = React.useState<Date>();
+  console.log(date);
+
+  const handleSelect = (newDay: Date | undefined) => {
+    if (!newDay) return;
+    if (!date) {
+      setDate(newDay);
+      return;
+    }
+    const diff = newDay.getTime() - date.getTime();
+    const diffInDays = diff / (1000 * 60 * 60 * 24);
+    const newDateFull = add(date, { days: Math.ceil(diffInDays) });
+    setDate(newDateFull);
+  };
 
   return (
     <Popover>
@@ -35,7 +48,7 @@ export function DateTimePicker() {
         <Calendar
           mode="single"
           selected={date}
-          onSelect={setDate}
+          onSelect={(d) => handleSelect(d)}
           initialFocus
         />
         <div className="p-3 border-t border-border">

@@ -43,12 +43,26 @@ export function getValidNumber(
 
 export function getValidHour(value: string) {
   if (isValidHour(value)) return value;
-  return getValidNumber(value, { max: 23 });
+  return getValidNumber(value, { max: 23, loop: true });
 }
 
 export function getValid12Hour(value: string) {
   if (isValid12Hour(value)) return value;
   return getValidNumber(value, { max: 12 });
+}
+
+export function tolocaleISOString(date: Date): string {
+  const pad = (num: number) => num.toString().padStart(2, '0');
+
+  const year = date.getFullYear();
+  const month = pad(date.getMonth() + 1); // Months are zero-indexed
+  const day = pad(date.getDate());
+  const hours = pad(date.getHours());
+  const minutes = pad(date.getMinutes());
+  const seconds = pad(date.getSeconds());
+  const milliseconds = pad(date.getMilliseconds());
+
+  return `${year}-${month}-${day}T${hours}:${minutes}:${seconds}.${milliseconds}`;
 }
 
 export function getValidMinuteOrSecond(value: string) {

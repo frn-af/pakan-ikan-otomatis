@@ -12,7 +12,7 @@ interface DeleteDataProps {
   row: Row<Schedule>
 }
 
-const DeleteData = async ({ row }: DeleteDataProps) => {
+const DeleteData = ({ row }: DeleteDataProps) => {
 
   const onClick = async () => {
     const id = row.original.id;

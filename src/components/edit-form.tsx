@@ -25,6 +25,7 @@ import { toast } from "./ui/use-toast"
 import { Row } from "@tanstack/react-table"
 import { Schedule } from "../../constants/seed"
 import { getSchedulesByDate, updateData } from "@/action/action"
+import { tolocaleISOString } from "./datetime/time-picker-utils"
 
 const formSchema = z.object({
   id: z.number().optional(),
@@ -89,7 +90,7 @@ export function EditForm({ row }: EditFormProps) {
     }
     const updateSchedule = await updateData({
       id: row.original.id,
-      datetime: data.dateTime.toISOString(),
+      datetime: tolocaleISOString(data.dateTime), // tolocaleISOString(data.dateTime
       weight: data.weight,
     })
     if (updateSchedule instanceof Error || !updateSchedule) {

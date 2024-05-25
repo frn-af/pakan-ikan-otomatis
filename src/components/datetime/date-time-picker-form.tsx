@@ -6,6 +6,7 @@ import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Calendar } from "@/components/ui/calendar";
+import { tolocaleISOString } from "./time-picker-utils";
 import {
   Popover,
   PopoverContent,
@@ -81,8 +82,9 @@ export function DateTimePickerForm() {
       return;
     }
 
+
     const newSchedule = await newData({
-      datetime: data.dateTime.toISOString(),
+      datetime: tolocaleISOString(data.dateTime),
       weight: data.weight,
     });
     if (newSchedule instanceof Error || !newSchedule) {
