@@ -8,7 +8,7 @@ ESP32 sebagai otak dari sistem ini. Sistem ini juga dilengkapi dengan fitur-fitu
 
 source code ini berisi program web dan api yang digunakan untuk mengontrol sistem pakan ikan otomatis.
 
-Workflow and API reference[documentation](./Documentations.md)
+Workflow and API reference [documentation](./Documentations.md)
 
 ## Teknologi dan Fitur
 - language : [Typescript](https://www.typescriptlang.org/)

@@ -9,7 +9,7 @@ import { cache } from "react";
 export const getSchedule = cache(async () => {
   const schedule = await db.query.schedule.findMany();
   const sortedSchedule = schedule.sort((a, b) => {
-    return new Date(b.datetime).getTime() - new Date(a.datetime).getTime();
+    return new Date(a.datetime).getTime() - new Date(b.datetime).getTime();
   });
   return sortedSchedule;
 });
