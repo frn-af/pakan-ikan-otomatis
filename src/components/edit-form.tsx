@@ -81,7 +81,7 @@ export function EditForm({ row }: EditFormProps) {
         description: (
           <div>
             Jadwal pemberian pakan pada tanggal{" "}
-            <strong>{format(data.dateTime, "PPP HH:mm:ss", { locale: id })}</strong> sudah ada.
+            <strong>{format(data.dateTime, "PPP HH:mm", { locale: id })}</strong> sudah ada.
             silahkan update jadwal yang sudah ada.
           </div>
         ),
@@ -105,7 +105,7 @@ export function EditForm({ row }: EditFormProps) {
       description: (
         <div>
           Pemberian Pakan akan dilakukan pada tanggal{" "}
-          <strong>{format(data.dateTime, "PPP HH:mm:ss")}</strong>
+          <strong>{format(data.dateTime, "PPP HH:mm")}</strong>
           {" "} dengan berat pakan: <strong>{data.weight} gram</strong>.
         </div>
       ),
@@ -149,7 +149,7 @@ export function EditForm({ row }: EditFormProps) {
                       >
                         <CalendarIcon className="mr-2 h-4 w-4" />
                         {field.value ? (
-                          format(field.value, "PPP HH:mm:ss", { locale: id })
+                          format(field.value, "PPP HH:mm", { locale: id })
                         ) : (
                           <span>Pick a date</span>
                         )}

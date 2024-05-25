@@ -59,10 +59,8 @@ export function tolocaleISOString(date: Date): string {
   const day = pad(date.getDate());
   const hours = pad(date.getHours());
   const minutes = pad(date.getMinutes());
-  const seconds = pad(date.getSeconds());
-  const milliseconds = pad(date.getMilliseconds());
 
-  return `${year}-${month}-${day}T${hours}:${minutes}:${seconds}.${milliseconds}`;
+  return `${year}-${month}-${day}T${hours}:${minutes}`;
 }
 
 export function getValidMinuteOrSecond(value: string) {
