@@ -8,7 +8,7 @@ ESP32 sebagai otak dari sistem ini. Sistem ini juga dilengkapi dengan fitur-fitu
 
 source code ini berisi program web dan api yang digunakan untuk mengontrol sistem pakan ikan otomatis.
 
-Workflow and API reference [documentation](./Documentations.md)
+API reference dan Program ESP32 [documentation](./documentations/docs.md)
 
 ## Teknologi dan Fitur
 - language : [Typescript](https://www.typescriptlang.org/)
@@ -37,12 +37,13 @@ Workflow and API reference [documentation](./Documentations.md)
 4. Jalankan
 
 ## Todo 
-- [ ] deploy 
-- [x] ~~api update waktu dan berat pakan~~
-- [x] ~~api get history pemberian pakan~~
-- [x] ~~ui input jadwal pemberian pakan~~
-- [x] ~~ui list waktu dan berat pakan~~
-- [x] ~~ui list history pemberian pakan~~
-- [ ] testing api update waktu dan berat pakan 
+- [x] ~deploy~
+- [x] ~api update waktu dan berat pakan~
+- [x] ~api get history pemberian pakan~
+- [x] ~ui input jadwal pemberian pakan~
+- [x] ~ui list waktu dan berat pakan~
+- [x] ~ui list history pemberian pakan~
+- [x] ~testing api update waktu dan berat pakan~
+- [ ] realtime testing
 
 
