@@ -30,11 +30,21 @@ API reference dan Program ESP32 [documentation](./documentations/docs.md)
 ## Cara Penggunaan
 1. Clone repository ini
 2. Buka terminal dan arahkan ke folder repository ini
-3. Install semua dependencies dengan cara mengetikkan perintah berikut
+3. ubah nama file `.env.example` menjadi `.env`
+
+4. isi file `.env` dengan database url dari neon db 
+    ```
+    DB_URL= 'your neon database url here'
+
+    ```
+5. Install semua dependencies dengan cara mengetikkan perintah berikut
     ```
     pnpm install
     ```
-4. Jalankan
+6. Jalankan aplikasi dengan cara mengetikkan perintah berikut
+    ```
+    pnpm dev
+    ```
 
 ## Todo 
 - [x] ~deploy~
