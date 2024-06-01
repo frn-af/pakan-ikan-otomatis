@@ -2,6 +2,7 @@
 import { ColumnDef, flexRender, getCoreRowModel, getPaginationRowModel, useReactTable } from "@tanstack/react-table";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "./ui/table";
 import { Button } from "./ui/button";
+import { cn } from "@/lib/utils";
 
 interface DataTableProps<TData, Tvalue> {
   data: TData[];
@@ -30,10 +31,10 @@ export function DataTable<TData, Tvalue>({
     <>
       <div className="w-full rounded-md border">
         <Table>
-          <TableHeader className="">
+          <TableHeader>
             {
               table.getHeaderGroups().map((headerGroup) => (
-                <TableRow key={headerGroup.id}>
+                <TableRow key={headerGroup.id} >
                   {headerGroup.headers.map((header) => (
                     <TableHead key={header.id} className="border-r text-center">
                       {header.isPlaceholder ? null : flexRender(
@@ -50,7 +51,6 @@ export function DataTable<TData, Tvalue>({
               table.getRowModel().rows?.length ? (
                 table.getRowModel().rows.map((row) => (
                   <TableRow key={row.id}
-                    data-state={row.getIsSelected() && "selected"}
                   >
                     {row.getVisibleCells().map((cell) => (
                       <TableCell key={cell.id} className="border-r text-center">
