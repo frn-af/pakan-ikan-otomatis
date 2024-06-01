@@ -3,12 +3,11 @@ import { DataTable } from "@/components/data-table";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { DateTimePickerForm } from "@/components/datetime/date-time-picker-form";
 import { Separator } from "@/components/ui/separator";
-import { getHistory, getSchedule } from "@/action/action";
+import { getSchedule } from "@/action/action";
 
 
 export default async function Home() {
   const scheduleData = await getSchedule();
-  const historyData = await getHistory();
   return (
     <main className="flex min-h-screen flex-col items-center p-10">
       <h1 className="capitalize text-4xl font-bold">
@@ -40,15 +39,6 @@ export default async function Home() {
             </CardContent>
           </Card>
         </div>
-        <Card className="p-4 w-full">
-          <CardHeader>
-            <h2 className="text-xl font-medium">History Pemberian Pakan</h2>
-          </CardHeader>
-          <Separator className="mb-4" />
-          <CardContent className="w-full">
-            <DataTable columns={column} data={historyData} />
-          </CardContent>
-        </Card>
       </div>
     </main>
   );
