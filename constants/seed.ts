@@ -3,7 +3,7 @@ export type Schedule = {
   id: number
   datetime: string
   weight: number
-  status: string
+  status: string | null
 }
 
 export const schedule: Schedule[] = [

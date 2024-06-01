@@ -1,5 +1,4 @@
-"use server";
-
+"use server"
 import { db } from "@/lib/db/db";
 import { InsertData, schedule } from "@/lib/db/schema";
 import { eq } from "drizzle-orm";
@@ -19,14 +18,6 @@ export const getSchedulesByDate = cache(async (date: Date) => {
     where: eq(schedule.datetime, date.toISOString()),
   });
   return scheduleData;
-});
-
-export const getHistory = cache(async () => {
-  const historyData = await db.query.history.findMany();
-  const sortedHistory = historyData.sort((a, b) => {
-    return new Date(b.datetime).getTime() - new Date(a.datetime).getTime();
-  });
-  return sortedHistory;
 });
 
 export const newData = async (data: InsertData) => {

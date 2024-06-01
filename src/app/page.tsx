@@ -4,8 +4,8 @@ import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { DateTimePickerForm } from "@/components/datetime/date-time-picker-form";
 import { Separator } from "@/components/ui/separator";
 import { getSchedule } from "@/action/action";
-import { schedule } from "../../constants/seed";
 
+export const revalidate = 1;
 
 export default async function Home() {
   const scheduleData = await getSchedule();
@@ -36,7 +36,7 @@ export default async function Home() {
             </CardHeader>
             <Separator className="mb-4" />
             <CardContent className="w-full">
-              <DataTable pageSize={7} columns={column} data={schedule} />
+              <DataTable columns={column} data={scheduleData} />
             </CardContent>
           </Card>
         </div>

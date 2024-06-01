@@ -59,7 +59,6 @@ export function tolocaleISOString(date: Date): string {
   const day = pad(date.getDate());
   const hours = pad(date.getHours());
   const minutes = pad(date.getMinutes());
-
   return `${year}-${month}-${day}T${hours}:${minutes}`;
 }
 

@@ -29,7 +29,6 @@ import { TimePicker } from "./time-picker";
 import { newData, getSchedulesByDate } from "@/action/action";
 
 const formSchema = z.object({
-  id: z.number().optional(),
   dateTime: z.date(),
   weight: z.coerce.number().min(1),
 });

@@ -1,26 +1,15 @@
+"use client"
 import { Button } from "@/components/ui/button"
-import {
-  Dialog,
-  DialogClose,
-  DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog"
-import { CalendarIcon, PenLine } from "lucide-react"
+import { CalendarIcon } from "lucide-react"
 import { Calendar } from "./ui/calendar"
 import { z } from "zod"
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
-import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "./ui/form"
+import { Form, FormControl, FormField, FormItem, FormMessage } from "./ui/form"
 import { TimePicker } from "./datetime/time-picker"
-import { Input } from "./ui/input"
 import { cn } from "@/lib/utils"
 import { format } from "date-fns"
 import { id } from "date-fns/locale";
-import { Card } from "./ui/card"
 import { toast } from "./ui/use-toast"
 import { Row } from "@tanstack/react-table"
 import { Schedule } from "../../constants/seed"
@@ -29,9 +18,7 @@ import { tolocaleISOString } from "./datetime/time-picker-utils"
 import { Popover, PopoverContent, PopoverTrigger } from "./ui/popover"
 
 const formSchema = z.object({
-  id: z.number().optional(),
   dateTime: z.date(),
-  weight: z.coerce.number().min(1),
 })
 
 interface EditFormProps {
@@ -92,6 +79,7 @@ export function EditForm({ row }: EditFormProps) {
       id: row.original.id,
       datetime: tolocaleISOString(data.dateTime),
       weight: row.original.weight,
+      status: row.original.status,
     })
     if (updateSchedule instanceof Error || !updateSchedule) {
       return toast({
@@ -154,14 +142,18 @@ export function EditForm({ row }: EditFormProps) {
                       date={field.value}
                     />
                   </div>
-                  <div className="p-3 border-t flex justify-center">
-                    <Button className="w-full md:w-24" type="submit">Submit</Button>
-                  </div>
                 </PopoverContent>
               </Popover>
             </FormItem>
           )}
         />
+        <div className={cn("p-3 border-t hidden  justify-center",
+          form.formState.isDirty && "flex",
+          form.formState.isSubmitted && "hidden"
+
+        )}>
+          <Button className="w-full md:w-24" type="submit">Submit</Button>
+        </div>
       </form>
     </Form>
   )

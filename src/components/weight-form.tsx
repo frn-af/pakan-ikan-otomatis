@@ -1,3 +1,4 @@
+"use client"
 import { Row } from "@tanstack/react-table";
 import { Schedule } from "../../constants/seed";
 import { z } from "zod";
@@ -5,16 +6,12 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { toast } from "./ui/use-toast";
 import { updateData } from "@/action/action";
-import { tolocaleISOString } from "./datetime/time-picker-utils";
-import { format } from "date-fns";
 import { Form, FormControl, FormField, FormItem, FormMessage } from "./ui/form";
 import { Input } from "./ui/input";
 import { Button } from "./ui/button";
-import { useEffect, useState } from "react";
+import { cn } from "@/lib/utils";
 
 const formSchema = z.object({
-  id: z.number().optional(),
-  dateTime: z.date(),
   weight: z.coerce.number().min(1),
 })
 
@@ -25,7 +22,6 @@ interface WeightFormProps {
 type FormSchemaType = z.infer<typeof formSchema>
 
 const WeightForm = ({ row }: WeightFormProps) => {
-  const [isEditing, setIsEditing] = useState(false)
 
   const form = useForm<FormSchemaType>({
     resolver: zodResolver(formSchema),
@@ -47,11 +43,11 @@ const WeightForm = ({ row }: WeightFormProps) => {
       });
       return;
     }
-
     const updateSchedule = await updateData({
       id: row.original.id,
       datetime: row.original.datetime,
       weight: data.weight,
+      status: row.original.status,
     })
     if (updateSchedule instanceof Error || !updateSchedule) {
       return toast({
@@ -83,21 +79,19 @@ const WeightForm = ({ row }: WeightFormProps) => {
               <FormItem className="md:flex items-center justify-center space-x-4">
                 <FormControl>
                   <Input className="border-0 text-center" type="number" placeholder="Berat pakan (gram)" {...field}
-                    onFocus={() => setIsEditing(true)}
-                    onBlur={() => setIsEditing(false)}
                   />
                 </FormControl>
-                {isEditing && (
-                  <div>
-                    <Button className="" type="submit">Simpan</Button>
-                  </div>
-                )}
                 <FormMessage />
               </FormItem>
             )}
           />
+          <Button className={cn("hidden w-full mt-4 md:w-24",
+            form.formState.isDirty && "inline",
+            form.formState.isSubmitted && "hidden"
+
+          )} type="submit">Save</Button>
         </form>
-      </Form>
+      </Form >
     </>
   );
 }
