@@ -1,4 +1,4 @@
-import { getSchedule } from "@/action/action";
+import { getWaitingList } from "@/action/action";
 import { db } from "@/lib/db/db";
 import { InsertData, schedule } from "@/lib/db/schema";
 import { eq } from "drizzle-orm";
@@ -11,16 +11,16 @@ export const runtime = "edge";
 const app = new Hono().basePath("/api");
 
 app.use("/*", cors());
-app.get("/schedule", async (c) => {
+app.get("/schedule/waitinglist", async (c) => {
   try {
-    const scheduleData = await getSchedule();
+    const scheduleData = await getWaitingList();
     return c.json(scheduleData);
   } catch (e) {
     return c.json({ error: e });
   }
 });
 
-app.put("/schedule/:id", async (c) => {
+app.put("/schedule/waitinglist/:id", async (c) => {
   try {
     const scheduleId = parseInt(c.req.param("id"));
     const data = await c.req.json<InsertData>();

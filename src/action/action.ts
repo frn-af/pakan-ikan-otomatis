@@ -5,6 +5,13 @@ import { eq } from "drizzle-orm";
 import { revalidatePath } from "next/cache";
 import { cache } from "react";
 
+export const getWaitingList = async () => {
+  const waitingList = await db.query.schedule.findMany({
+    where: eq(schedule.status, "waiting"),
+  });
+  return waitingList;
+};
+
 export const getSchedule = cache(async () => {
   const schedule = await db.query.schedule.findMany();
   const sortedSchedule = schedule.sort((a, b) => {
