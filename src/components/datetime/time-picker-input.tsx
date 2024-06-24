@@ -101,7 +101,7 @@ const TimePickerInput = React.forwardRef<
           onChange?.(e);
         }}
         type={type}
-        inputMode="decimal"
+        inputMode="numeric"
         onKeyDown={(e) => {
           onKeyDown?.(e);
           handleKeyDown(e);

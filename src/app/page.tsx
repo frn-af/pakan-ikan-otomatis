@@ -10,7 +10,7 @@ export const revalidate = 1;
 export default async function Home() {
   const scheduleData = await getSchedule();
   return (
-    <main className="flex min-h-screen flex-col items-center p-10">
+    <main className="flex min-h-screen flex-col items-center p-4 md:p-10">
       <h1 className="capitalize text-4xl font-bold">
         Sistem pemberian pakan otomatis
       </h1>
