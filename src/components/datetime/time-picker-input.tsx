@@ -27,7 +27,7 @@ const TimePickerInput = React.forwardRef<
   (
     {
       className,
-      type = "text",
+      type = "number",
       value,
       id,
       name,
